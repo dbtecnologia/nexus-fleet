@@ -32,3 +32,6 @@ A API fica em `http://localhost:3333/api`, a documentação em `/api/docs`, o JS
 ## Próxima camada de produção
 
 O front foi organizado para receber uma API Node/Next com Prisma e PostgreSQL/PostGIS. A implementação de produção deve trocar `demoVehicles` e o armazenamento local por endpoints autenticados, aplicar `tenantId` em todas as consultas, criptografar credenciais de cada integração e publicar adaptadores GPS e de bloqueador por contrato (normalização de posição, evento e comando). Redis, WebSockets, Swagger/OpenAPI, faturamento e a ingestão TCP/UDP entram nessa camada de serviço — não são simulados nesta entrega visual.
+
+
+> Deploy na Vercel: o frontend estático é publicado automaticamente. O backend Express, PostgreSQL/PostGIS e Redis devem ser executados em um ambiente Node com essas variáveis configuradas.
