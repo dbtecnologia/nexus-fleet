@@ -113,6 +113,8 @@ model Vehicle {
   driverName      String?
   driverPhone     String?
   driverLicense   String?
+  driverLicenseCategory String?
+  driverLicenseExpiresAt DateTime?
   photoUrl        String?          @db.Text
   status          VehicleStatus    @default(ACTIVE)
   notes           String?
