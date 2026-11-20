@@ -1,4 +1,3 @@
-Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
 import 'dotenv/config';
 import path from 'node:path';
 import http from 'node:http';
