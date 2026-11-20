@@ -1,7 +1,8 @@
+Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
 import 'dotenv/config';
 import path from 'node:path';
 import http from 'node:http';
-import express, { type NextFunction, type Request, type Response } from 'express';
+import express, { type NextFunction, type Request, type RequestHandler, type Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
@@ -39,9 +40,10 @@ redisSubscriber.on('message', (_channel: string, message: string) => {
 });
 
 const stripe = config.STRIPE_SECRET_KEY ? new Stripe(config.STRIPE_SECRET_KEY) : null;
+const securityHeaders = helmet as unknown as (options?: { crossOriginResourcePolicy?: false }) => RequestHandler;
 
 app.disable('x-powered-by');
-app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(securityHeaders({ crossOriginResourcePolicy: false }));
 app.use(cors({ origin: config.CORS_ORIGIN.split(',').map((value) => value.trim()), credentials: true }));
 
 function broadcastTenant(tenantId: string, payload: unknown) {
@@ -359,3 +361,4 @@ async function shutdown(signal: string) {
 }
 process.on('SIGINT', () => void shutdown('SIGINT'));
 process.on('SIGTERM', () => void shutdown('SIGTERM'));
+
