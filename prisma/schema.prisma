@@ -111,6 +111,9 @@ model Vehicle {
   renavam         String?
   type            String?
   driverName      String?
+  driverPhone     String?
+  driverLicense   String?
+  photoUrl        String?          @db.Text
   status          VehicleStatus    @default(ACTIVE)
   notes           String?
   deletedAt       DateTime?
@@ -242,3 +245,4 @@ model Invoice {
   createdAt        DateTime @default(now())
   @@index([tenantId, createdAt(sort: Desc)])
 }
+
