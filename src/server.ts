@@ -121,6 +121,7 @@ const loginSchema = z.object({ tenantSlug: z.string().min(3), email: z.string().
 const vehicleSchema = z.object({ plate: z.string().min(3).max(12), brand: z.string().optional(), model: z.string().optional(), year: z.coerce.number().int().optional(), color: z.string().optional(), type: z.string().optional(), driverName: z.string().optional(), notes: z.string().optional() });
 const deviceSchema = z.object({ vehicleId: z.string().optional(), manufacturer: z.string().optional(), model: z.string().optional(), imei: z.string().min(5), serialNumber: z.string().optional(), externalId: z.string().optional(), protocol: z.string().optional(), blockerProvider: z.string().optional(), blockerExternalId: z.string().optional(), blockerBaseUrl: z.string().url().optional(), blockerSettings: z.record(z.string(), z.unknown()).default({}) });
 const integrationSchema = z.object({ name: z.string().min(2), provider: z.string().min(2), protocol: z.nativeEnum(IntegrationProtocol), baseUrl: z.string().url().optional(), settings: z.record(z.string(), z.unknown()).default({}) });
+const integrationUpdateSchema = z.object({ enabled: z.boolean().optional(), name: z.string().min(2).optional() }).refine((body) => body.enabled !== undefined || body.name !== undefined, { message: 'no_changes' });
 const commandSchema = z.object({ action: z.enum(['BLOCK', 'UNBLOCK', 'STATUS']), reason: z.string().min(3).max(300).optional() });
 
 app.get('/api/health', async (_req, res) => {
@@ -184,7 +185,7 @@ app.get('/api/tenant', authenticate, async (req, res) => {
 
 app.get('/api/vehicles', authenticate, async (req, res) => {
   const vehicles = await prisma.vehicle.findMany({ where: { tenantId: currentUser(req).tenantId, deletedAt: null }, include: { device: true }, orderBy: { createdAt: 'desc' } });
-  res.json(vehicles);
+  res.json(vehicles.map(({ device, ...vehicle }) => ({ ...vehicle, device: device ? (({ blockerEncryptedConfig: _secret, ...safeDevice }) => safeDevice)(device) : null })));
 });
 
 app.post('/api/vehicles', authenticate, requireRole(UserRole.ADMIN, UserRole.OPERATOR), async (req, res) => {
@@ -239,6 +240,15 @@ app.post('/api/integrations', authenticate, requireRole(UserRole.ADMIN), async (
   const body = integrationSchema.parse(req.body);
   const integration = await prisma.integration.create({ data: { tenantId: currentUser(req).tenantId, name: body.name, provider: body.provider, protocol: body.protocol, baseUrl: body.baseUrl, encryptedConfig: encryptJson(body.settings) } });
   res.status(201).json(integrationView(integration));
+});
+
+app.patch('/api/integrations/:id', authenticate, requireRole(UserRole.ADMIN), async (req, res) => {
+  const id = routeParam(req, 'id');
+  const body = integrationUpdateSchema.parse(req.body);
+  const result = await prisma.integration.updateMany({ where: { id, tenantId: currentUser(req).tenantId }, data: body });
+  if (!result.count) return res.status(404).json({ error: 'integration_not_found' });
+  const integration = await prisma.integration.findFirst({ where: { id, tenantId: currentUser(req).tenantId } });
+  res.json(integration ? integrationView(integration) : null);
 });
 
 app.post('/api/integrations/:id/test', authenticate, requireRole(UserRole.ADMIN, UserRole.OPERATOR), async (req, res) => {
