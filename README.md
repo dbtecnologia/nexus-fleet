@@ -24,7 +24,8 @@ A API fica em `http://localhost:3333/api`, a documentação em `/api/docs`, o JS
 
 - Dashboard operacional com indicadores, mapa e atividade recente em modo demonstração ou conectado à API.
 - Rastreamento com seleção de veículo e painel lateral de detalhes.
-- Consulta e filtro local de veículos.
+- Cadastro de veículos com foto, motorista, telefone e CNH; validação e persistência pela API quando conectado.
+- Área de Motoristas, Clientes, Equipamentos e Relatórios com ações operacionais e exportação CSV.
 - Central de Integrações com cadastro, ativação/desativação e teste de conexão via API; sem backend, usa persistência local.
 - Módulo Bloqueador com confirmação, motivo obrigatório, comandos reais via adaptador quando conectado e auditoria por veículo.
 - Área SaaS com tenant ativo, plano Enterprise, limites de uso, usuários, veículos, integrações e cobrança.
