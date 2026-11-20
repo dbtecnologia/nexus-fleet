@@ -94,10 +94,29 @@
             <label class="wide">Motorista<input name="driverName" placeholder="Nome do motorista" /></label>
             <label>Telefone do motorista<input name="driverPhone" placeholder="(31) 99999-9999" /></label>
             <label>CNH<input name="driverLicense" placeholder="00000000000" /></label>
+            <label>Categoria CNH<select name="driverLicenseCategory"><option value="">Selecione</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="AB">AB</option><option value="AC">AC</option><option value="AD">AD</option><option value="AE">AE</option></select></label>
+            <label>Validade da CNH<input name="driverLicenseExpiresAt" type="date" /></label>
             <label class="wide">Foto do veículo<input id="vehiclePhoto" name="photo" type="file" accept="image/*" /></label>
             <div class="photo-preview wide" id="vehiclePhotoPreview" hidden><img alt="Pré-visualização da foto do veículo" /></div>
           </div>
           <div class="modal-actions"><button type="button" class="button secondary" id="vehicleModalCancel">Cancelar</button><button type="submit" class="button primary">Salvar veículo</button></div>
+        </form>
+      </section>
+    </div>
+    <div class="modal-backdrop" id="driverModalBackdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="driverModalTitle">
+        <div class="modal-header"><div><span class="eyebrow">Cadastro de habilitação</span><h2 id="driverModalTitle">Novo motorista</h2></div><button class="modal-close" id="driverModalClose" aria-label="Fechar">×</button></div>
+        <form id="driverForm">
+          <div class="form-grid">
+            <label class="wide">Nome completo<input name="driverName" required placeholder="Nome do motorista" /></label>
+            <label>Telefone<input name="driverPhone" placeholder="(31) 99999-9999" /></label>
+            <label>Veículo vinculado<select name="vehicleId" required id="driverVehicleSelect"></select></label>
+            <label>Número da CNH<input name="driverLicense" required placeholder="00000000000" /></label>
+            <label>Categoria<select name="driverLicenseCategory"><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="AB">AB</option><option value="AC">AC</option><option value="AD">AD</option><option value="AE">AE</option></select></label>
+            <label>Validade da CNH<input name="driverLicenseExpiresAt" type="date" required /></label>
+          </div>
+          <div class="secret-note"><span>✓</span><div><strong>Validade controlada</strong><p>A CNH fica vinculada ao veículo e aparece na área de Motoristas para acompanhamento.</p></div></div>
+          <div class="modal-actions"><button type="button" class="button secondary" id="driverModalCancel">Cancelar</button><button type="submit" class="button primary">Salvar motorista</button></div>
         </form>
       </section>
     </div>
