@@ -4,7 +4,9 @@ Interface operacional para um SaaS multiempresa de rastreamento veicular.
 
 ## Rodar localmente
 
-Abra `index.html` em um navegador moderno. A primeira entrega é estática para permitir validação rápida dos fluxos. Os dados de integrações criados na interface são persistidos no `localStorage` do navegador.
+Para validar a interface sem backend, abra `index.html` em um navegador moderno. O modo demonstração mantém os dados no navegador.
+
+Para usar dados reais, inicie a API e clique no perfil no canto inferior esquerdo para informar a URL, o slug do tenant e as credenciais. A interface então carrega veículos, posições, integrações, cobrança e bloqueadores pela API autenticada; a atualização de posições usa WebSocket quando disponível.
 
 ## Backend Node + Prisma
 
@@ -20,18 +22,16 @@ A API fica em `http://localhost:3333/api`, a documentação em `/api/docs`, o JS
 
 ## O que já está funcional
 
-- Dashboard operacional com indicadores, mapa demonstrativo, alertas e atividade recente.
+- Dashboard operacional com indicadores, mapa e atividade recente em modo demonstração ou conectado à API.
 - Rastreamento com seleção de veículo e painel lateral de detalhes.
 - Consulta e filtro local de veículos.
-- Central de Integrações com cadastro, ativação/desativação, teste de conexão simulado e persistência local.
-- Módulo Bloqueador com estado por veículo, comandos simulados, confirmação, auditoria e regras de segurança.
+- Central de Integrações com cadastro, ativação/desativação e teste de conexão via API; sem backend, usa persistência local.
+- Módulo Bloqueador com confirmação, motivo obrigatório, comandos reais via adaptador quando conectado e auditoria por veículo.
 - Área SaaS com tenant ativo, plano Enterprise, limites de uso, usuários, veículos, integrações e cobrança.
 - Menu responsivo, sidebar recolhível e estados responsivos para desktop e celular.
-- Dados de posição explicitamente marcados como demonstração; nenhuma coordenada real é inventada.
+- Modo demonstração explicitamente identificado; nenhuma coordenada real é inventada quando a API não está conectada.
 
-## Próxima camada de produção
+## Publicação
 
-O front foi organizado para receber uma API Node/Next com Prisma e PostgreSQL/PostGIS. A implementação de produção deve trocar `demoVehicles` e o armazenamento local por endpoints autenticados, aplicar `tenantId` em todas as consultas, criptografar credenciais de cada integração e publicar adaptadores GPS e de bloqueador por contrato (normalização de posição, evento e comando). Redis, WebSockets, Swagger/OpenAPI, faturamento e a ingestão TCP/UDP entram nessa camada de serviço — não são simulados nesta entrega visual.
+O frontend estático pode ser publicado na Vercel. O backend Express precisa de uma hospedagem Node com PostgreSQL/PostGIS, Redis e as variáveis de `.env.example`; configure `CORS_ORIGIN` com o domínio da Vercel antes de conectar o painel.
 
-
-> Deploy na Vercel: o frontend estático é publicado automaticamente. O backend Express, PostgreSQL/PostGIS e Redis devem ser executados em um ambiente Node com essas variáveis configuradas.
