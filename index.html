@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071a35" />
+    <meta name="description" content="Nexus Fleet — centro de operações e rastreamento veicular" />
+    <title>Nexus Fleet — Centro de operações</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhancements.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="brand-copy"><strong>NEXUS</strong><small>FLEET OPERATIONS</small></div>
+          <button class="icon-button sidebar-toggle" id="sidebarToggle" aria-label="Recolher menu">‹</button>
+        </div>
+
+        <div class="tenant-switcher">
+          <div class="tenant-avatar">AC</div>
+          <div class="tenant-copy"><strong>AutoCarga Logística</strong><span>Ambiente produção</span></div>
+          <span class="chevron">⌄</span>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegação principal">
+          <p class="nav-label">Operação</p>
+          <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Visão geral</span></button>
+          <button class="nav-item" data-view="tracking"><span class="nav-icon">◉</span><span>Rastreamento</span><em class="live-dot">LIVE</em></button>
+          <button class="nav-item" data-view="blocker"><span class="nav-icon">⬢</span><span>Bloqueador</span><em class="nav-badge blocker-badge">2</em></button>
+          <button class="nav-item" data-view="vehicles"><span class="nav-icon">▣</span><span>Veículos</span></button>
+          <button class="nav-item" data-view="equipment"><span class="nav-icon">⌁</span><span>Equipamentos</span></button>
+          <p class="nav-label nav-label-spaced">Gestão</p>
+          <button class="nav-item" data-view="integrations"><span class="nav-icon">⇄</span><span>Central de integrações</span><em class="nav-badge">3</em></button>
+          <button class="nav-item" data-view="clients"><span class="nav-icon">♧</span><span>Clientes</span></button>
+          <button class="nav-item" data-view="reports"><span class="nav-icon">▤</span><span>Relatórios</span></button>
+          <button class="nav-item" data-view="billing"><span class="nav-icon">◇</span><span>Plano e cobrança</span></button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="support-card"><div class="support-icon">?</div><div><strong>Precisa de ajuda?</strong><span>Fale com o suporte</span></div><span>↗</span></div>
+          <button class="profile-row"><div class="profile-avatar">MR</div><div class="profile-copy"><strong>Marina Rocha</strong><span>Administradora</span></div><span>•••</span></button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="mobile-brand"><div class="brand-mark"><span></span><span></span><span></span></div><strong>NEXUS</strong></div>
+          <div class="breadcrumbs"><span>Operação</span><b>/</b><strong id="breadcrumbCurrent">Visão geral</strong></div>
+          <div class="top-actions">
+            <div class="system-health"><span class="health-pulse"></span><span>Sistemas operacionais</span></div>
+            <button class="icon-button notification-button" aria-label="Notificações">♢<i></i></button>
+            <div class="top-avatar">MR</div>
+          </div>
+        </header>
+        <div id="viewRoot"></div>
+      </main>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header"><div><span class="eyebrow" id="modalEyebrow">Nova integração</span><h2 id="modalTitle">Adicionar fornecedor</h2></div><button class="modal-close" id="modalClose" aria-label="Fechar">×</button></div>
+        <form id="integrationForm">
+          <div class="form-grid">
+            <label>Nome da integração<input name="name" required placeholder="Ex.: TrackPro principal" /></label>
+            <label>Fornecedor<select name="provider"><option>TrackPro Cloud</option><option>OnixSat</option><option>Rastreia API</option><option>Outro fornecedor</option></select></label>
+            <label class="wide">URL da API<input name="url" placeholder="https://api.fornecedor.com/v1" /></label>
+            <label>Protocolo<select name="protocol"><option>REST</option><option>Webhook</option><option>TCP</option><option>UDP</option></select></label>
+            <label>Intervalo de sincronização<select name="interval"><option>30 segundos</option><option>1 minuto</option><option>5 minutos</option><option>15 minutos</option></select></label>
+            <label class="wide">Endpoint de posições<input name="positions" placeholder="/vehicles/positions" /></label>
+          </div>
+          <div class="secret-note"><span>⌁</span><div><strong>Credenciais protegidas</strong><p>Os segredos ficam criptografados no backend e nunca aparecem em respostas públicas.</p></div></div>
+          <div class="modal-actions"><button type="button" class="button secondary" id="modalCancel">Cancelar</button><button type="submit" class="button primary">Salvar integração</button></div>
+        </form>
+      </section>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
