@@ -16,5 +16,56 @@
  .map-wrap.google-map-active::before, .map-wrap.google-map-active::after { display: none; }
  .map-wrap.google-map-active .map-vehicle { display: none; }
  .map-wrap.google-map-active .map-caption { background: rgba(255,255,255,.94); }
+ html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; overscroll-behavior: none; }
+ body { min-width: 320px; overscroll-behavior: none; }
+ button, a, [role="button"] { touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+ input, textarea, select { font-size: 16px; }
+ .app-shell { min-height: 100dvh; }
+ .mobile-menu-toggle { display: none; }
+ @media (hover: hover) and (pointer: fine) {
+   .nav-item:hover, .button:hover, .row-action:hover { transform: none; }
+ }
+ @media (pointer: coarse) {
+   button, .button, .nav-item, .row-action { min-height: 44px; }
+   .row-action { min-width: 44px; }
+ }
+ @media (max-width: 800px) {
+   .topbar { min-height: 62px; height: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) max(17px, env(safe-area-inset-right, 0px)) 10px max(17px, env(safe-area-inset-left, 0px)); }
+   .mobile-menu-toggle { display: inline-grid; place-items: center; width: 42px; height: 42px; color: var(--ink); font-size: 21px; flex: 0 0 42px; }
+   .mobile-brand { margin-right: auto; }
+   .sidebar { width: min(86vw, 320px); flex-basis: min(86vw, 320px); left: calc(-1 * min(86vw, 320px)); padding: calc(18px + env(safe-area-inset-top, 0px)) 15px calc(16px + env(safe-area-inset-bottom, 0px)); height: 100dvh; overflow-y: auto; overscroll-behavior: contain; }
+   .sidebar.open { left: 0; }
+   .page { padding: 24px max(17px, env(safe-area-inset-right, 0px)) calc(35px + env(safe-area-inset-bottom, 0px)) max(17px, env(safe-area-inset-left, 0px)); }
+   .view-topline { align-items: flex-start; flex-direction: column; gap: 14px; }
+   .view-topline .heading-actions { width: 100%; }
+   .view-topline .heading-actions .button { flex: 1; justify-content: center; }
+   .panel-head { gap: 12px; align-items: flex-start; }
+   .panel-head h2 { line-height: 1.2; }
+   .table-toolbar { flex-wrap: wrap; justify-content: flex-end; }
+   .table-toolbar .filter-button, .table-toolbar .panel-link { min-height: 38px; }
+   .map-wrap { height: 250px; margin-inline: 0; }
+   .map-controls { left: 8px; top: 8px; right: 8px; overflow-x: auto; padding-bottom: 2px; }
+   .map-control { flex: 0 0 auto; min-height: 38px; }
+   .map-caption { left: 8px; right: 8px; bottom: 8px; max-width: calc(100% - 16px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+   .map-legend { right: 8px; bottom: 42px; padding: 6px 7px; gap: 6px; }
+   .data-table th, .data-table td { padding-top: 12px; padding-bottom: 12px; }
+   .modal-backdrop { align-items: flex-end; padding: 0; }
+   .modal { width: 100%; max-height: calc(100dvh - env(safe-area-inset-top, 0px)); overflow-y: auto; overscroll-behavior: contain; border-radius: 16px 16px 0 0; padding: 20px max(17px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(17px, env(safe-area-inset-left, 0px)); }
+   .modal-header { position: sticky; top: -20px; z-index: 2; padding-top: 2px; background: #fff; }
+   .modal-actions { position: sticky; bottom: calc(-1 * env(safe-area-inset-bottom, 0px)); background: #fff; padding-bottom: 2px; }
+   .modal-actions .button { min-height: 46px; flex: 1; justify-content: center; }
+   .vehicle-drawer { width: 100%; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; padding: calc(20px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px)); }
+   .toast-region { right: max(12px, env(safe-area-inset-right, 0px)); left: max(12px, env(safe-area-inset-left, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+   .toast { min-width: 0; width: 100%; }
+ }
+ @media (max-width: 420px) {
+   .metrics-grid { gap: 8px; }
+   .metric-card { padding: 13px 12px; min-height: 100px; }
+   .metric-top { font-size: 10px; }
+   .metric-value { font-size: 23px; }
+   .heading-actions, .view-topline .heading-actions { flex-wrap: wrap; }
+   .heading-actions .button, .view-topline .heading-actions .button { flex: 1 1 100%; }
+   .map-legend { display: none; }
+ }
  @media (max-width: 900px) { .client-grid { grid-template-columns: 1fr; } }
 
