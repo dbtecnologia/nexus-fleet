@@ -33,6 +33,7 @@ A API fica em `http://localhost:3333/api`, a documentação em `/api/docs`, o JS
 - Módulo Bloqueador com confirmação, motivo obrigatório, comandos reais via adaptador quando conectado e auditoria por veículo.
 - Área SaaS com tenant ativo, plano Enterprise, limites de uso, usuários, veículos, integrações e cobrança.
 - Menu responsivo, sidebar recolhível e estados responsivos para desktop e celular.
+- Versão mobile com menu lateral acessível, áreas de toque ampliadas, safe area para notch, modais em formato de folha e tabelas com rolagem horizontal.
 - Modo demonstração explicitamente identificado; nenhuma coordenada real é inventada quando a API não está conectada.
 
 ## Publicação
