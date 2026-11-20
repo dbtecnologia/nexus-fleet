@@ -8,6 +8,8 @@ Para validar a interface sem backend, abra `index.html` em um navegador moderno.
 
 Para usar dados reais, inicie a API e clique no perfil no canto inferior esquerdo para informar a URL, o slug do tenant e as credenciais. A interface então carrega veículos, posições, integrações, cobrança e bloqueadores pela API autenticada; a atualização de posições usa WebSocket quando disponível.
 
+O mapa usa o Google Maps JavaScript API. No mapa operacional, clique em “Ativar Google Maps” e informe uma chave restrita ao domínio do painel. No Google Cloud, habilite billing e a API Maps JavaScript; a chave não é gravada no repositório. Em produção, prefira injetar `window.NEXUS_GOOGLE_MAPS_KEY` por uma configuração protegida do host.
+
 ## Backend Node + Prisma
 
 O backend agora está estruturado em `src/` e usa PostgreSQL/PostGIS, Redis, JWT, WebSockets e Stripe. Para executar em uma máquina com Node/npm:
@@ -24,7 +26,8 @@ A API fica em `http://localhost:3333/api`, a documentação em `/api/docs`, o JS
 
 - Dashboard operacional com indicadores, mapa e atividade recente em modo demonstração ou conectado à API.
 - Rastreamento com seleção de veículo e painel lateral de detalhes.
-- Cadastro de veículos com foto, motorista, telefone e CNH; validação e persistência pela API quando conectado.
+- Cadastro de veículos com foto, motorista, telefone e CNH; edição e exclusão com confirmação, validação e persistência pela API quando conectado.
+- Cadastro de motoristas com CNH, categoria e validade; edição e exclusão removem o vínculo do condutor com o veículo sem apagar o veículo.
 - Área de Motoristas, Clientes, Equipamentos e Relatórios com ações operacionais e exportação CSV.
 - Central de Integrações com cadastro, ativação/desativação e teste de conexão via API; sem backend, usa persistência local.
 - Módulo Bloqueador com confirmação, motivo obrigatório, comandos reais via adaptador quando conectado e auditoria por veículo.
