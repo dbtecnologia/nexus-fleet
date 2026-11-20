@@ -16,8 +16,10 @@ export const openapi = {
     '/vehicles': { get: { security: [{ bearerAuth: [] }], summary: 'Lista veículos do tenant' }, post: { security: [{ bearerAuth: [] }], summary: 'Cria veículo' } },
     '/positions/latest': { get: { security: [{ bearerAuth: [] }], summary: 'Última posição de cada veículo' } },
     '/integrations': { get: { security: [{ bearerAuth: [] }], summary: 'Lista integrações sem segredos' }, post: { security: [{ bearerAuth: [] }], summary: 'Cria integração com credenciais criptografadas' } },
+    '/integrations/{id}': { patch: { security: [{ bearerAuth: [] }], summary: 'Ativa ou pausa uma integração' } },
     '/integrations/{id}/test': { post: { security: [{ bearerAuth: [] }], summary: 'Testa conexão do fornecedor' } },
     '/vehicles/{vehicleId}/blocker/commands': { post: { security: [{ bearerAuth: [] }], summary: 'Envia comando de bloqueio ou liberação' } },
     '/billing/checkout': { post: { security: [{ bearerAuth: [] }], summary: 'Cria checkout Stripe' } },
   },
 } as const;
+
