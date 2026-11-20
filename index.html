@@ -33,6 +33,7 @@
           <button class="nav-item" data-view="tracking"><span class="nav-icon">◉</span><span>Rastreamento</span><em class="live-dot">LIVE</em></button>
           <button class="nav-item" data-view="blocker"><span class="nav-icon">⬢</span><span>Bloqueador</span><em class="nav-badge blocker-badge">2</em></button>
           <button class="nav-item" data-view="vehicles"><span class="nav-icon">▣</span><span>Veículos</span></button>
+          <button class="nav-item" data-view="drivers"><span class="nav-icon">♙</span><span>Motoristas</span></button>
           <button class="nav-item" data-view="equipment"><span class="nav-icon">⌁</span><span>Equipamentos</span></button>
           <p class="nav-label nav-label-spaced">Gestão</p>
           <button class="nav-item" data-view="integrations"><span class="nav-icon">⇄</span><span>Central de integrações</span><em class="nav-badge">3</em></button>
@@ -91,6 +92,10 @@
             <label>Cor<input name="color" placeholder="Branco" /></label>
             <label>Tipo<input name="type" placeholder="Cavalo mecânico" /></label>
             <label class="wide">Motorista<input name="driverName" placeholder="Nome do motorista" /></label>
+            <label>Telefone do motorista<input name="driverPhone" placeholder="(31) 99999-9999" /></label>
+            <label>CNH<input name="driverLicense" placeholder="00000000000" /></label>
+            <label class="wide">Foto do veículo<input id="vehiclePhoto" name="photo" type="file" accept="image/*" /></label>
+            <div class="photo-preview wide" id="vehiclePhotoPreview" hidden><img alt="Pré-visualização da foto do veículo" /></div>
           </div>
           <div class="modal-actions"><button type="button" class="button secondary" id="vehicleModalCancel">Cancelar</button><button type="submit" class="button primary">Salvar veículo</button></div>
         </form>
