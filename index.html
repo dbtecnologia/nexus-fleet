@@ -43,7 +43,7 @@
 
         <div class="sidebar-bottom">
           <div class="support-card"><div class="support-icon">?</div><div><strong>Precisa de ajuda?</strong><span>Fale com o suporte</span></div><span>↗</span></div>
-          <button class="profile-row"><div class="profile-avatar">MR</div><div class="profile-copy"><strong>Marina Rocha</strong><span>Administradora</span></div><span>•••</span></button>
+          <button class="profile-row" id="connectionButton"><div class="profile-avatar">MR</div><div class="profile-copy"><strong id="profileName">Marina Rocha</strong><span id="profileRole">Administradora · modo demonstração</span></div><span>•••</span></button>
         </div>
       </aside>
 
@@ -52,7 +52,7 @@
           <div class="mobile-brand"><div class="brand-mark"><span></span><span></span><span></span></div><strong>NEXUS</strong></div>
           <div class="breadcrumbs"><span>Operação</span><b>/</b><strong id="breadcrumbCurrent">Visão geral</strong></div>
           <div class="top-actions">
-            <div class="system-health"><span class="health-pulse"></span><span>Sistemas operacionais</span></div>
+            <div class="system-health"><span class="health-pulse"></span><span id="systemHealthLabel">Modo demonstração</span></div>
             <button class="icon-button notification-button" aria-label="Notificações">♢<i></i></button>
             <div class="top-avatar">MR</div>
           </div>
@@ -79,6 +79,39 @@
         </form>
       </section>
     </div>
+    <div class="modal-backdrop" id="vehicleModalBackdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="vehicleModalTitle">
+        <div class="modal-header"><div><span class="eyebrow">Cadastro operacional</span><h2 id="vehicleModalTitle">Novo veículo</h2></div><button class="modal-close" id="vehicleModalClose" aria-label="Fechar">×</button></div>
+        <form id="vehicleForm">
+          <div class="form-grid">
+            <label>Placa<input name="plate" required placeholder="ABC-1D23" /></label>
+            <label>Marca<input name="brand" placeholder="Volvo" /></label>
+            <label>Modelo<input name="model" placeholder="FH 540" /></label>
+            <label>Ano<input name="year" type="number" min="1950" max="2100" placeholder="2025" /></label>
+            <label>Cor<input name="color" placeholder="Branco" /></label>
+            <label>Tipo<input name="type" placeholder="Cavalo mecânico" /></label>
+            <label class="wide">Motorista<input name="driverName" placeholder="Nome do motorista" /></label>
+          </div>
+          <div class="modal-actions"><button type="button" class="button secondary" id="vehicleModalCancel">Cancelar</button><button type="submit" class="button primary">Salvar veículo</button></div>
+        </form>
+      </section>
+    </div>
+    <div class="modal-backdrop" id="connectionModalBackdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="connectionModalTitle">
+        <div class="modal-header"><div><span class="eyebrow">Ambiente SaaS</span><h2 id="connectionModalTitle">Conectar ao backend</h2></div><button class="modal-close" id="connectionModalClose" aria-label="Fechar">×</button></div>
+        <form id="connectionForm">
+          <div class="form-grid">
+            <label class="wide">URL da API<input name="apiUrl" required placeholder="https://api.seudominio.com" /></label>
+            <label>Slug da organização<input name="tenantSlug" required placeholder="sua-empresa" /></label>
+            <label>E-mail<input name="email" type="email" required placeholder="admin@empresa.com" /></label>
+            <label class="wide">Senha<input name="password" type="password" required placeholder="••••••••" /></label>
+          </div>
+          <div class="secret-note"><span>⌁</span><div><strong>Autenticação segura</strong><p>O token JWT fica armazenado somente neste navegador. A API continua responsável pelo isolamento do tenant.</p></div></div>
+          <div class="modal-actions"><button type="button" class="button secondary" id="connectionDisconnect">Desconectar</button><button type="submit" class="button primary">Entrar no ambiente</button></div>
+        </form>
+      </section>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
+
