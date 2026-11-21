@@ -60,6 +60,15 @@ const demoMapCoordinates=[
   {lat:-19.8844,lng:-44.0762},{lat:-19.9701,lng:-44.1158},{lat:-19.9487,lng:-44.0614}
 ];
 function googleMapsKey(){return window.NEXUS_GOOGLE_MAPS_KEY||localStorage.getItem('nexus-google-maps-key')||'';}
+async function loadPublicGoogleMapsKey(){
+  if(googleMapsKey())return;
+  try{
+    const response=await fetch('/api/maps-config',{headers:{Accept:'application/json'}});
+    if(!response.ok)return;
+    const payload=await response.json();
+    if(payload?.key&&!googleMapsKey())window.NEXUS_GOOGLE_MAPS_KEY=String(payload.key);
+  }catch{}
+}
 function loadGoogleMapsApi(){
   if(window.google?.maps)return Promise.resolve(window.google.maps);
   if(googleMapsLoadPromise)return googleMapsLoadPromise;
@@ -223,6 +232,9 @@ document.getElementById('driverModalClose').addEventListener('click',closeDriver
 document.getElementById('connectionButton').addEventListener('click',openConnectionModal);document.getElementById('connectionModalClose').addEventListener('click',closeConnectionModal);document.getElementById('connectionModalBackdrop').addEventListener('click',e=>{if(e.target.id==='connectionModalBackdrop')closeConnectionModal()});document.getElementById('connectionDisconnect').addEventListener('click',()=>{accessToken='';apiBase='';liveMode=false;localStorage.removeItem('nexus-access-token');localStorage.removeItem('nexus-api-url');liveSocket?.close();liveSocket=null;closeConnectionModal();updateConnectionChrome();toast('Desconectado','A interface voltou ao modo demonstração.');render();});document.getElementById('connectionForm').addEventListener('submit',async e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target));apiBase=String(data.apiUrl).replace(/\/$/,'');try{const result=await apiRequest('/api/auth/login',{method:'POST',body:JSON.stringify({tenantSlug:data.tenantSlug,email:data.email,password:data.password})});accessToken=result.token;liveMode=true;localStorage.setItem('nexus-api-url',apiBase);localStorage.setItem('nexus-access-token',accessToken);closeConnectionModal();await loadLiveData({notify:true});toast('Backend conectado','O ambiente multi-tenant está ativo neste navegador.');}catch(error){accessToken='';liveMode=false;toast('Falha no login',error.message);}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('vehicleDrawer')?.remove();if(!document.getElementById('modalBackdrop').hidden)closeModal();if(!document.getElementById('vehicleModalBackdrop').hidden)closeVehicleModal();if(!document.getElementById('driverModalBackdrop').hidden)closeDriverModal();if(!document.getElementById('connectionModalBackdrop').hidden)closeConnectionModal()}});
 updateConnectionChrome();
-render();
-if(liveMode)void loadLiveData();
+void (async()=>{
+  await loadPublicGoogleMapsKey();
+  render();
+  if(liveMode)await loadLiveData();
+})();
 
