@@ -69,3 +69,79 @@
  }
  @media (max-width: 900px) { .client-grid { grid-template-columns: 1fr; } }
 
+/* Visual refinement: command-center hierarchy */
+:root {
+  --canvas: #f3f6fa;
+  --line: #e1e8f0;
+  --blue: #2f72ed;
+}
+
+body { background: var(--canvas); }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(14px);
+  border-bottom-color: rgba(215, 225, 236, .9);
+}
+.page { max-width: 1540px; padding-top: 34px; }
+.page-heading h1, .view-topline h1 { letter-spacing: -.055em; }
+.metrics-grid { gap: 14px; }
+.metric-card {
+  border-color: #e3eaf2;
+  box-shadow: 0 8px 24px rgba(16, 35, 62, .045);
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+.metric-card:nth-child(1) { border-top: 3px solid #2f72ed; }
+.metric-card:nth-child(2) { border-top: 3px solid #18a978; }
+.metric-card:nth-child(3) { border-top: 3px solid #9aaaba; }
+.metric-card:nth-child(4) { border-top: 3px solid #df9b24; }
+.metric-card:nth-child(5) { border-top: 3px solid #d84d56; }
+.metric-card:nth-child(6) { border-top: 3px solid #8066da; }
+.map-panel {
+  border-color: #dbe5ef;
+  box-shadow: 0 14px 36px rgba(16, 35, 62, .08);
+}
+.map-panel .panel-head { padding-bottom: 16px; }
+.map-wrap {
+  height: 320px;
+  margin: 0 12px 12px;
+  box-shadow: inset 0 0 0 1px rgba(7, 26, 53, .07);
+}
+.map-controls { left: 14px; top: 14px; }
+.map-control {
+  border-radius: 7px;
+  padding: 8px 11px;
+  box-shadow: 0 5px 15px rgba(16, 35, 62, .12);
+}
+.map-caption, .map-legend { box-shadow: 0 4px 12px rgba(16, 35, 62, .08); }
+.data-panel, .side-stack .panel {
+  border-color: var(--line);
+  box-shadow: 0 9px 25px rgba(16, 35, 62, .04);
+}
+.data-table th { color: #71849c; background: #f7f9fc; }
+.data-table td { color: #536981; }
+.data-table tbody tr { transition: background .15s ease; }
+.panel-link { font-weight: 700; }
+.view-topline { align-items: flex-end; }
+
+@media (hover: hover) and (pointer: fine) {
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(16, 35, 62, .08);
+  }
+  .data-table tbody tr:hover { background: #f8fbff; }
+}
+
+@media (hover: none) {
+  .nav-item:not(.active):hover { color: #9fb2cc; background: transparent; }
+  .button:hover { border-color: var(--line); }
+  .row-action:hover { color: #9aaaba; }
+}
+
+@media (max-width: 800px) {
+  .page { padding-top: 24px; }
+  .map-wrap { height: 272px; }
+}
+
