@@ -8,7 +8,7 @@ Para validar a interface sem backend, abra `index.html` em um navegador moderno.
 
 Para usar dados reais, inicie a API e clique no perfil no canto inferior esquerdo para informar a URL, o slug do tenant e as credenciais. A interface então carrega veículos, posições, integrações, cobrança e bloqueadores pela API autenticada; a atualização de posições usa WebSocket quando disponível.
 
-O mapa usa o Google Maps JavaScript API. No mapa operacional, clique em “Ativar Google Maps” e informe uma chave restrita ao domínio do painel. No Google Cloud, habilite billing e a API Maps JavaScript; a chave não é gravada no repositório. Em produção, prefira injetar `window.NEXUS_GOOGLE_MAPS_KEY` por uma configuração protegida do host.
+O mapa usa o Google Maps JavaScript API. No mapa operacional, clique em “Ativar Google Maps” e informe uma chave restrita ao domínio do painel. No Google Cloud, habilite billing e a API Maps JavaScript; a chave não é gravada no repositório. Em produção, configure `GOOGLE_MAPS_API_KEY` nas variáveis do Vercel; a rota `/api/maps-config` entrega a chave somente em tempo de execução para o carregador do mapa.
 
 ## Backend Node + Prisma
 
